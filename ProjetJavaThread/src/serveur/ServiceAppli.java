@@ -31,6 +31,7 @@ public class ServiceAppli extends Thread {
 									connectionSocket.getOutputStream())),true);
 
 			request = inFromClient.readLine();
+			
 			while(!request.equals("stop")) {
 				// Attente d'une demande de connexion sur la socket d'accueil
 

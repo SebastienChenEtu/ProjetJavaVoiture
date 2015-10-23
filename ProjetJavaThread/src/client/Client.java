@@ -26,15 +26,30 @@ public class Client {
 				new InputStreamReader(
 						clientSocket.getInputStream()));
 
-		System.out.println("Bienvenue, Vous pouvez procéder à votre reservation de véhicule");
+		System.out.println("Bienvenue, Vous pouvez procéder à votre reservation de véhicule! \nSaisir ok pour commencer.");
 		request = inFromUser.readLine();
 		// Emission des donnees au serveur
 		outToServer.println(request);
+		
+		// Lecture des donnees arrivant du serveur
+		answer = inFromServer.readLine();
+		
+		
+		System.out.println("Voici les Voitures que nous vous proposant : " + answer + "\n Choisissez votre voiture.");
+		
+		request = inFromUser.readLine();
+		
+		
+		// Emission des donnees au serveur
+		outToServer.println(request);
+		
+		
+		
 
 		while(!request.equals("stop")) {
 			// Lecture des donnees arrivant du serveur
 			answer = inFromServer.readLine();
-			System.out.println("FROM SERVER: " + answer);
+			System.out.println("" + answer);
 			
 			System.out.println("");
 			request = inFromUser.readLine();
