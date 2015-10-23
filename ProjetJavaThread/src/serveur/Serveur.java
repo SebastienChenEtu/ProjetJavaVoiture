@@ -35,7 +35,11 @@ public class Serveur {
 
 		while(true) {
 			Socket connectionSocket = welcomeSocket.accept();
+<<<<<<< HEAD
 			Thread service = new ServiceAppli(connectionSocket,garage);
+=======
+			Thread service = new ServiceAppli(connectionSocket, garage);
+>>>>>>> 3a6a56e3b9504717d04f02037d53d2e5b70c06e1
 			service.start();
 		} // boucle et attend la connexion d'un nouveau client
 	}

@@ -16,7 +16,11 @@ public class ServiceAppli extends Thread {
 	Socket connectionSocket;
 	private static Garage garage;
 
+<<<<<<< HEAD
 	public ServiceAppli(Socket socket,Garage garage) {
+=======
+	public ServiceAppli(Socket socket, Garage garage) {
+>>>>>>> 3a6a56e3b9504717d04f02037d53d2e5b70c06e1
 		connectionSocket = socket;
 		this.garage = garage;
 	}
@@ -35,6 +39,7 @@ public class ServiceAppli extends Thread {
 									connectionSocket.getOutputStream())),true);
 
 			request = inFromClient.readLine();
+			
 			while(!request.equals("stop")) {
 				// Attente d'une demande de connexion sur la socket d'accueil
 
@@ -54,5 +59,5 @@ public class ServiceAppli extends Thread {
 		}
 
 	}
-
+	
 }
