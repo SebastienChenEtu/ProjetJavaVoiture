@@ -1,12 +1,17 @@
 package garage;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Garage {
 
 	private int nbEmployee;
-	private int stockVoiture;
+	private int stockVoiture = 0;
+	private List<Voiture> listVoiture;
 	
 	public Garage(int nbEmployee){
 		this.nbEmployee = nbEmployee;
+		listVoiture = new LinkedList<Voiture>();
 	}
 
 	public int getNbEmployee() {
@@ -25,6 +30,14 @@ public class Garage {
 		this.stockVoiture = stockVoiture;
 	}
 	
+	public void ajoutVoiture(Voiture v){
+		listVoiture.add(v);
+	}
 	
+	public void nbreVoitureTotal(){
+		for(Voiture v : listVoiture){
+			stockVoiture = stockVoiture + v.getStock();
+		}
+	}
 	
 }

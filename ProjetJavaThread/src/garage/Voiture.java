@@ -4,12 +4,14 @@ public class Voiture {
 
 	private String immatriculation;
 	private String modele;
+	private String couleur;
 	private int stock;
 	
-	public Voiture(String immatriculation, String modele, int stock){
+	public Voiture(String immatriculation, String modele,String couleur, int stock){
 		this.immatriculation = immatriculation;
 		this.modele = modele;
 		this.stock = stock;
+		this.couleur = couleur;
 	}
 
 	public String getImmatriculation() {
@@ -34,5 +36,13 @@ public class Voiture {
 
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+
+	public String getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(String couleur) {
+		this.couleur = couleur;
 	}
 }
