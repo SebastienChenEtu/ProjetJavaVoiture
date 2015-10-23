@@ -5,6 +5,8 @@ public class Voiture {
 	private String immatriculation;
 	private String modele;
 	private String couleur;
+	
+	
 	private int stock;
 	
 	public Voiture(String immatriculation, String modele,String couleur, int stock){
