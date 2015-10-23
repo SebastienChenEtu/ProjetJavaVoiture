@@ -8,13 +8,17 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import garage.Garage;
+
 public class ServiceAppli extends Thread {
 	
 	String request;
 	Socket connectionSocket;
+	private static Garage garage;
 
-	public ServiceAppli(Socket socket) {
+	public ServiceAppli(Socket socket, Garage garage) {
 		connectionSocket = socket;
+		this.garage = garage;
 	}
 
 	public void run() {
@@ -50,5 +54,5 @@ public class ServiceAppli extends Thread {
 		}
 
 	}
-
+	
 }
