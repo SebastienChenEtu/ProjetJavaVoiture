@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Garage {
 
+
 	private int nbEmployee;
 	private int stockVoiture = 0;
 	private List<Voiture> listVoiture;
