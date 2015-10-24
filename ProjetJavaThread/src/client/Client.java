@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.LinkedList;
 import java.util.List;
 
 import garage.Voiture;
@@ -14,10 +15,11 @@ public class Client {
 
 	public static void main(String argv[]) throws Exception {
 
-		String nbVoiture;
+		String nbModele;
 		String request;
 		String answer;
 		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+		List<String> listeModele = new LinkedList<String>();
 
 		// Creation de la socket client, demande de connexion
 		Socket clientSocket = new Socket("localhost", 8080);
@@ -43,17 +45,46 @@ public class Client {
 				// processus de reservation
 
 				// Lecture des donnees arrivant du serveur
-				nbVoiture = inFromServer.readLine();
-				int nbreVoiture = Integer.parseInt(nbVoiture);
+				nbModele = inFromServer.readLine();
+				int nbreVoiture = Integer.parseInt(nbModele);
 
 				System.out.println("Voici les Voitures que nous vous proposant: ");
 
-				request = "envoi";
-				for (int i = 0; i <= nbreVoiture; i++) {
-                 	outToServer.println(request);
+				for (int i = 0; i < nbreVoiture; i++) {
 					answer = inFromServer.readLine();
 					System.out.println(answer);
+					
+					listeModele.add(answer);
 				}
+
+				System.out.println("Veuillez Indiquer Le Modele souhaité :");
+				answer = inFromUser.readLine();
+				outToServer.println(answer);
+				
+				
+				boolean verifSaisie = false; 
+				
+				while(!verifSaisie){
+					
+					for(int i=0; i<listeModele.size() ; i++){
+						if (answer == listeModele.get(i)){
+							
+						}
+						else {
+							answer = inFromUser.readLine();
+							System.out.println(answer + "Ressaisissez votre modéle : ");
+							System.out.println("");
+							
+							outToServer.println(answer);
+						}
+						break;
+					}
+					
+				}
+				
+				
+				outToServer.println(answer);
+				
 
 				break;
 
@@ -65,7 +96,10 @@ public class Client {
 				// Lecture des donnees arrivant du serveur
 				answer = inFromServer.readLine();
 				System.out.println(answer
-						+ "Veuillez saisir :\n Reserver pour voir la liste de voiture disponible \n Suivi pour visualiser le suivi de votre réservation");
+						+ "Veuillez saisir :\n Reserver pour voir la liste de voiture disponible "
+						+ "\n Suivi pour visualiser le suivi de votre réservation");
+				
+				
 
 				System.out.println("");
 			}

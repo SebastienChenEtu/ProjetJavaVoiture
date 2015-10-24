@@ -43,17 +43,33 @@ public class ServiceAppli extends Thread {
 					nbVoiture = Integer.toString(garage.getListVoiture().size());
 					outToClient.println(nbVoiture);
 					for (Voiture v : garage.getListVoiture()) {
-					
-					request = inFromClient.readLine();
-					//System.out.println(v.getModele() + " " + v.getCouleur());
-					request = v.getModele() + " " + v.getCouleur();
-				//System.out.println(request);
-					outToClient.println(request);
-				
-				}
-		
+						if (v.getStock() != 0) {
 
+							request = v.getModele() + " " + v.getCouleur();
+							outToClient.println(request);
+
+						}
+					}
+
+					request = inFromClient.readLine();
+
+					boolean verifSaisie = false;
 					
+					while (!verifSaisie){
+						
+						for (Voiture v : garage.getListVoiture()) {
+							if (request == v.getModele()) {
+
+							} else {
+								request = "Saisi incorrect.";
+								// Emission des donnees au client
+								outToClient.println(request);
+								request = inFromClient.readLine();
+							}
+							break;
+					}
+					
+					}
 
 					// processus de reservation
 					break;
