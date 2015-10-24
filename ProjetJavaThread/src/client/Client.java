@@ -52,9 +52,10 @@ public class Client {
 
 				for (int i = 0; i < nbreVoiture; i++) {
 					answer = inFromServer.readLine();
+					listeModele.add(answer);
+					answer = inFromServer.readLine();
 					System.out.println(answer);
 					
-					listeModele.add(answer);
 				}
 
 				System.out.println("Veuillez Indiquer Le Modele souhaité :");
@@ -67,18 +68,21 @@ public class Client {
 				while(!verifSaisie){
 					
 					for(int i=0; i<listeModele.size() ; i++){
-						if (answer == listeModele.get(i)){
-							
+						if (answer.toLowerCase().equals(listeModele.get(i).toLowerCase())){
+							answer = inFromServer.readLine();
+							System.out.println(answer);
+							verifSaisie = true;
+							break;
 						}
-						else {
-							answer = inFromUser.readLine();
-							System.out.println(answer + "Ressaisissez votre modéle : ");
-							System.out.println("");
-							
-							outToServer.println(answer);
-						}
-						break;
 					}
+					if(!verifSaisie){
+						answer = inFromServer.readLine();
+						System.out.println(answer + "Ressaisissez votre modéle : ");
+						System.out.println("");
+						answer = inFromUser.readLine();
+						outToServer.println(answer);
+					}
+				
 					
 				}
 				

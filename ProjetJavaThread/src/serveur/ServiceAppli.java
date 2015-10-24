@@ -44,7 +44,8 @@ public class ServiceAppli extends Thread {
 					outToClient.println(nbVoiture);
 					for (Voiture v : garage.getListVoiture()) {
 						if (v.getStock() != 0) {
-
+							request = v.getModele();
+							outToClient.println(request);
 							request = v.getModele() + " " + v.getCouleur();
 							outToClient.println(request);
 
@@ -58,16 +59,19 @@ public class ServiceAppli extends Thread {
 					while (!verifSaisie){
 						
 						for (Voiture v : garage.getListVoiture()) {
-							if (request == v.getModele()) {
-
-							} else {
-								request = "Saisi incorrect.";
-								// Emission des donnees au client
+							if (request.toLowerCase().equals(v.getModele().toLowerCase())) {
+								request = "Voiture réserver";
 								outToClient.println(request);
-								request = inFromClient.readLine();
+								verifSaisie = true;
+								break;
 							}
-							break;
 					}
+						if(!verifSaisie){
+							request = "Saisi incorrect.";
+							// Emission des donnees au client
+							outToClient.println(request);
+							request = inFromClient.readLine();	
+						}
 					
 					}
 
