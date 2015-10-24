@@ -5,15 +5,22 @@ public class Voiture {
 	private String immatriculation;
 	private String modele;
 	private String couleur;
-	
+	private String etat;
+	private int nbCommande;
 	
 	private int stock;
 	
-	public Voiture(String immatriculation, String modele,String couleur, int stock){
-		this.immatriculation = immatriculation;
-		this.modele = modele;
+	public Voiture(String modele,String couleur, int stock){
+		this.modele = modele; 
 		this.stock = stock;
 		this.couleur = couleur;
+	}
+	
+	public Voiture(String immatriculation, String modele, String couleur,int commande ){
+		this.immatriculation = immatriculation;
+		this.modele = modele;
+		this.couleur = couleur;
+		this.nbCommande = commande;
 	}
 
 	public String getImmatriculation() {
@@ -46,5 +53,21 @@ public class Voiture {
 
 	public void setCouleur(String couleur) {
 		this.couleur = couleur;
+	}
+
+	public String getEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
+
+	public int getNbCommande() {
+		return nbCommande;
+	}
+
+	public void setNbCommande(int nbCommande) {
+		this.nbCommande = nbCommande;
 	}
 }
