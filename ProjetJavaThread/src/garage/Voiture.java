@@ -10,13 +10,13 @@ public class Voiture {
 	
 	private int stock;
 	
-	public Voiture(String modele,String couleur, int stock){
+	public Voiture(String modele,String couleur, int stock) {
 		this.modele = modele; 
 		this.stock = stock;
 		this.couleur = couleur;
 	}
 	
-	public Voiture(String immatriculation, String modele, String couleur,int commande ){
+	public Voiture(String immatriculation, String modele, String couleur, int commande) {
 		this.immatriculation = immatriculation;
 		this.modele = modele;
 		this.couleur = couleur;
@@ -70,4 +70,5 @@ public class Voiture {
 	public void setNbCommande(int nbCommande) {
 		this.nbCommande = nbCommande;
 	}
+	
 }

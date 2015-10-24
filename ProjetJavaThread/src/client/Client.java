@@ -9,8 +9,6 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
 
-import garage.Voiture;
-
 public class Client {
 
 	public static void main(String argv[]) throws Exception {
@@ -21,10 +19,10 @@ public class Client {
 		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 		List<String> listeModele = new LinkedList<String>();
 
-		// Creation de la socket client, demande de connexion
+		// Création de la socket client, demande de connexion
 		Socket clientSocket = new Socket("localhost", 8080);
 
-		// Creation du flux en sortie
+		// Création du flux en sortie
 		PrintWriter outToServer = new PrintWriter(
 				new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())), true);
 
@@ -32,86 +30,71 @@ public class Client {
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
 		System.out.println(
-				"Bienvenue! Voulez Vous: \n Reserver (taper reserver) \n Voir votre suivi (taper suivi) \n Quitter (taper stop)");
+				"Bienvenue! Voulez-vous: \n Réserver (taper reserver) \n Voir votre suivi (taper suivi) \n Quitter (taper stop)");
 		request = inFromUser.readLine();
 
-		// Emission des donnees au serveur
+		// Émission des donnéees au serveur
 		outToServer.println(request);
 
-		while (!request.toLowerCase().equals("stop")) {
-			switch (request.toLowerCase()) {
+		while(!request.toLowerCase().equals("stop")) {
+			switch(request.toLowerCase()) {
 
-			case ("reserver"):
-				// processus de reservation
+				// Processus de réservation
+				case("reserver") :
+					// Lecture des donnéees arrivant du serveur
+					nbModele = inFromServer.readLine();
+					int nbreVoiture = Integer.parseInt(nbModele);
+					System.out.println("Voici les voitures que nous vous proposons : ");
 
-				// Lecture des donnees arrivant du serveur
-				nbModele = inFromServer.readLine();
-				int nbreVoiture = Integer.parseInt(nbModele);
+					for(int i = 0; i < nbreVoiture; i++) {
+						answer = inFromServer.readLine();
+						listeModele.add(answer);
+						answer = inFromServer.readLine();
+						System.out.println(answer);
+					}
 
-				System.out.println("Voici les Voitures que nous vous proposant: ");
-
-				for (int i = 0; i < nbreVoiture; i++) {
-					answer = inFromServer.readLine();
-					listeModele.add(answer);
-					answer = inFromServer.readLine();
-					System.out.println(answer);
-					
-				}
-
-				System.out.println("Veuillez Indiquer Le Modele souhaité :");
-				answer = inFromUser.readLine();
-				outToServer.println(answer);
+					System.out.println("Veuillez indiquer le modèle souhaité :");
+					answer = inFromUser.readLine();
+					outToServer.println(answer);
 				
+					boolean verifSaisie = false; 
 				
-				boolean verifSaisie = false; 
-				
-				while(!verifSaisie){
-					
-					for(int i=0; i<listeModele.size() ; i++){
-						if (answer.toLowerCase().equals(listeModele.get(i).toLowerCase())){
+					while(!verifSaisie) {
+						for(int i = 0; i < listeModele.size(); i++) {
+							if(answer.toLowerCase().equals(listeModele.get(i).toLowerCase())) {
+								answer = inFromServer.readLine();
+								System.out.println(answer);
+								verifSaisie = true;
+								break;
+							}
+						}
+						if(!verifSaisie) {
 							answer = inFromServer.readLine();
-							System.out.println(answer);
-							verifSaisie = true;
-							break;
+							System.out.println(answer + "Ressaisissez votre modéle : ");
+							System.out.println("");
+							answer = inFromUser.readLine();
+							outToServer.println(answer);
 						}
 					}
-					if(!verifSaisie){
-						answer = inFromServer.readLine();
-						System.out.println(answer + "Ressaisissez votre modéle : ");
-						System.out.println("");
-						answer = inFromUser.readLine();
-						outToServer.println(answer);
-					}
-				
-					
-				}
-				
-				
-				outToServer.println(answer);
-				
+					outToServer.println(answer);
+					break;
 
-				break;
+				// Processus de suivi
+				case("suivi") :
+					break;
 
-			case ("suivi"):
-				// processus de suivi
-				break;
-
-			default:
-				// Lecture des donnees arrivant du serveur
-				answer = inFromServer.readLine();
-				System.out.println(answer
-						+ "Veuillez saisir :\n Reserver pour voir la liste de voiture disponible "
-						+ "\n Suivi pour visualiser le suivi de votre réservation");
-				
-				
-
-				System.out.println("");
+				default :
+					// Lecture des donnéees arrivant du serveur
+					answer = inFromServer.readLine();
+					System.out.println(answer
+							+ "Veuillez saisir :\n \"reserver\" pour voir la liste des voitures disponibles"
+							+ "\n \"suivi\" pour visualiser le suivi de votre réservation");
+					System.out.println("");
 			}
 			request = inFromUser.readLine();
-			// Emission des donnees au serveur
+			// Émission des donnéees au serveur
 			outToServer.println(request);
 		}
-
 		clientSocket.close();
 	}
 

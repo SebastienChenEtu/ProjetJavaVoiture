@@ -1,16 +1,16 @@
 package garage;
 
-public class Employee extends Thread{
+public class Employee extends Thread {
 
 	private String nom;
 	private String prenom;
 	
-	public Employee(String nom, String prenom){
+	public Employee(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
 	}
 	
-	public void run(){
+	public void run() {
 		
 	}
 
@@ -29,4 +29,5 @@ public class Employee extends Thread{
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
+	
 }

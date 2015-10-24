@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.List;
 
 import garage.Garage;
 import garage.Voiture;
@@ -25,7 +24,7 @@ public class ServiceAppli extends Thread {
 	}
 
 	public void run() {
-		// Creation du flux en entree attache a la socket
+		// Création du flux en entrée attachée à la socket
 		BufferedReader inFromClient;
 		try {
 			inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
@@ -35,70 +34,65 @@ public class ServiceAppli extends Thread {
 
 			request = inFromClient.readLine();
 
-			while (!request.toLowerCase().equals("stop")) {
+			while(!request.toLowerCase().equals("stop")) {
 				// Attente d'une demande de connexion sur la socket d'accueil
-				switch (request.toLowerCase()) {
-
-				case ("reserver"):
-					nbVoiture = Integer.toString(garage.getListVoiture().size());
-					outToClient.println(nbVoiture);
-					for (Voiture v : garage.getListVoiture()) {
-						if (v.getStock() != 0) {
-							request = v.getModele();
-							outToClient.println(request);
-							request = v.getModele() + " " + v.getCouleur();
-							outToClient.println(request);
-
-						}
-					}
-
-					request = inFromClient.readLine();
-
-					boolean verifSaisie = false;
-					
-					while (!verifSaisie){
+				switch(request.toLowerCase()) {
+				
+					// Processus de réservation
+					case("reserver") :
+						nbVoiture = Integer.toString(garage.getListVoiture().size());
+						outToClient.println(nbVoiture);
 						
-						for (Voiture v : garage.getListVoiture()) {
-							if (request.toLowerCase().equals(v.getModele().toLowerCase())) {
-								request = "Voiture réserver";
+						for(Voiture v : garage.getListVoiture()) {
+							if(v.getStock() != 0) {
+								request = v.getModele();
 								outToClient.println(request);
-								verifSaisie = true;
-								break;
+								request = v.getModele() + " " + v.getCouleur();
+								outToClient.println(request);
 							}
-					}
-						if(!verifSaisie){
-							request = "Saisi incorrect.";
-							// Emission des donnees au client
-							outToClient.println(request);
-							request = inFromClient.readLine();	
 						}
+						
+						request = inFromClient.readLine();
+						boolean verifSaisie = false;
 					
-					}
+						while(!verifSaisie) {
+							for(Voiture v : garage.getListVoiture()) {
+								if(request.toLowerCase().equals(v.getModele().toLowerCase())) {
+									request = "Voiture réservée.";
+									outToClient.println(request);
+									verifSaisie = true;
+									break;
+								}
+							}
+							if(!verifSaisie) {
+								request = "Saisie incorrect.";
+								// Emission des données au client
+								outToClient.println(request);
+								request = inFromClient.readLine();	
+							}
+						}
+						break;
 
-					// processus de reservation
-					break;
+					// Processus de suivi
+					case("suivi") :
+						break;
 
-				case ("suivi"):
-					// processus de suivi
-					break;
-
-				default:
-					request = "Saisi incorrect.";
-					// Emission des donnees au client
-					outToClient.println(request);
+					default :
+						request = "Saisie incorrecte.";
+						// Émission des données au client
+						outToClient.println(request);
 				}
 
-				// Lecture des donnees arrivant du client
+				// Lecture des données arrivant du client
 				request = inFromClient.readLine();
 			}
 
-			System.out.println("Programme Terminé. Au revoir!");
+			System.out.println("Programme terminé. Au revoir !");
 			connectionSocket.close();
 
-		} catch (IOException e) {
+		} catch(IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }
