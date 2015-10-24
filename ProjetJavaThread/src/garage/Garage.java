@@ -39,5 +39,13 @@ public class Garage {
 			stockVoiture = stockVoiture + v.getStock();
 		}
 	}
+
+	public List<Voiture> getListVoiture() {
+		return listVoiture;
+	}
+
+	public void setListVoiture(List<Voiture> listVoiture) {
+		this.listVoiture = listVoiture;
+	}
 	
 }

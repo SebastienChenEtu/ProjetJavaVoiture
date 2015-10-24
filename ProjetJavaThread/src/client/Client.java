@@ -25,37 +25,51 @@ public class Client {
 		BufferedReader inFromServer = new BufferedReader(
 				new InputStreamReader(
 						clientSocket.getInputStream()));
-
+		
+		// reserver ou suivi
 		System.out.println("Bienvenue, Vous pouvez procéder à votre reservation de véhicule! \nSaisir ok pour commencer.");
+		
 		request = inFromUser.readLine();
 		// Emission des donnees au serveur
 		outToServer.println(request);
 		
-		// Lecture des donnees arrivant du serveur
-		answer = inFromServer.readLine();
-		
-		
-		System.out.println("Voici les Voitures que nous vous proposant : " + answer + "\n Choisissez votre voiture.");
-		
-		request = inFromUser.readLine();
-		
-		
-		// Emission des donnees au serveur
-		outToServer.println(request);
-		
-		
-		
-
-		while(!request.equals("stop")) {
-			// Lecture des donnees arrivant du serveur
-			answer = inFromServer.readLine();
-			System.out.println("" + answer);
+		while(!request.toLowerCase().equals("stop")) {
+			switch (request.toLowerCase()){
 			
-			System.out.println("");
+			case ("reserver"):
+				// processus de reservation
+				
+				
+				// Lecture des donnees arrivant du serveur
+				answer = inFromServer.readLine();
+				
+				
+				System.out.println("Voici les Voitures que nous vous proposant : " + answer + "\n Choisissez votre voiture.");
+				
+				request = inFromUser.readLine();
+				
+				
+				// Emission des donnees au serveur
+				outToServer.println(request);
+				
+				
+			break;
+			
+			case ("suivi"):
+				//processus de suivi
+			break;
+			
+			default: 
+				// Lecture des donnees arrivant du serveur
+				answer = inFromServer.readLine();
+				System.out.println(answer);
+				System.out.println("");
+			}					
 			request = inFromUser.readLine();
 			// Emission des donnees au serveur
 			outToServer.println(request);
 		}
+	
 		clientSocket.close();
 	}
 	

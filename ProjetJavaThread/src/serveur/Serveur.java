@@ -6,11 +6,8 @@ import garage.Voiture;
 
 public class Serveur {
 	
-	
 	public static void main(String argv[]) throws Exception {
 		
-		
-		// Creation de la socket d'accueil au port 8080
 	
 		Garage garage = new Garage(1);
 		
@@ -28,18 +25,13 @@ public class Serveur {
 		
 		garage.nbreVoitureTotal();
 		
-		
-		
+		// Creation de la socket d'accueil au port 8080
 		ServerSocket welcomeSocket = new ServerSocket(8080);
 		
 
 		while(true) {
 			Socket connectionSocket = welcomeSocket.accept();
-<<<<<<< HEAD
 			Thread service = new ServiceAppli(connectionSocket,garage);
-=======
-			Thread service = new ServiceAppli(connectionSocket, garage);
->>>>>>> 3a6a56e3b9504717d04f02037d53d2e5b70c06e1
 			service.start();
 		} // boucle et attend la connexion d'un nouveau client
 	}
