@@ -40,18 +40,20 @@ public class ServiceAppli extends Thread {
 				switch (request.toLowerCase()) {
 
 				case ("reserver"):
-					nbVoiture = Integer.toString(garage.getStockVoiture());
+					nbVoiture = Integer.toString(garage.getListVoiture().size());
 					outToClient.println(nbVoiture);
-
-					for (int i = 0; i <= garage.getStockVoiture(); i++) {
-						
-						request = inFromClient.readLine();
-						System.out.println(request);
-						request = garage.getListVoiture().get(i).getModele() + " " + garage.getListVoiture().get(i).getCouleur();
-						System.out.println(request);
-						outToClient.println(request);
+					for (Voiture v : garage.getListVoiture()) {
 					
-					}
+					request = inFromClient.readLine();
+					//System.out.println(v.getModele() + " " + v.getCouleur());
+					request = v.getModele() + " " + v.getCouleur();
+				//System.out.println(request);
+					outToClient.println(request);
+				
+				}
+		
+
+					
 
 					// processus de reservation
 					break;

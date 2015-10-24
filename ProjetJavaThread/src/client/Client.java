@@ -29,7 +29,6 @@ public class Client {
 		// Creation du flux en entree
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-		// reserver ou suivi
 		System.out.println(
 				"Bienvenue! Voulez Vous: \n Reserver (taper reserver) \n Voir votre suivi (taper suivi) \n Quitter (taper stop)");
 		request = inFromUser.readLine();
@@ -51,9 +50,8 @@ public class Client {
 
 				request = "envoi";
 				for (int i = 0; i <= nbreVoiture; i++) {
-                 	outToServer.print(request);
-                 	System.out.println(request);
-					answer = inFromUser.readLine();
+                 	outToServer.println(request);
+					answer = inFromServer.readLine();
 					System.out.println(answer);
 				}
 
