@@ -2,32 +2,42 @@ package garage;
 
 public class Employee extends Thread {
 
-	private String nom;
-	private String prenom;
+	private int temps;
+	private CommandeVoiture commandeVoiture;
+	private static Garage garage;
 	
-	public Employee(String nom, String prenom) {
-		this.nom = nom;
-		this.prenom = prenom;
+	public Employee(int temps, CommandeVoiture commandeVoiture, Garage garage) {
+		this.temps = temps;
+		this.commandeVoiture = commandeVoiture;
+		this.garage = garage;
 	}
 	
 	public void run() {
+		try {
+			prepareCommande();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
-	public String getNom() {
-		return nom;
+	public void prepareCommande() throws InterruptedException {
+		//netoyage entretien plein carburant
+		int tempsPreparation = (commandeVoiture.getVoiture().getTemps() + temps)/3 ;
+		for(CommandeVoiture cmdVoiture : garage.getListeCmdvoiture()){
+			if(cmdVoiture.getNumeroCommande() == commandeVoiture.getNumeroCommande()){
+				cmdVoiture.setEtat("nettoyage");
+				Thread.sleep(tempsPreparation);
+				cmdVoiture.setEtat("entretien");
+				Thread.sleep(tempsPreparation);
+				cmdVoiture.setEtat("carburant");
+				Thread.sleep(tempsPreparation);
+				cmdVoiture.setEtat("pret");
+				break;
+			}
+		}
+		garage.getListeEmployeeNonDispo().remove();
+		
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-	
 }

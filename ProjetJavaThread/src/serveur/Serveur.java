@@ -10,11 +10,11 @@ public class Serveur {
 		
 		Garage garage = new Garage(1);
 		
-		Voiture bmw = new Voiture("BMW", "Blanche", 5);
-		Voiture peugeot = new Voiture("PEUGEOT", "Bleue", 5); 
-		Voiture citroen = new Voiture("CITROEN", "Rouge", 5);
-		Voiture ferrari = new Voiture ("FERRARI", "Rouge", 1);
-		Voiture toyota = new Voiture("TOYOTA", "Grise", 6);
+		Voiture bmw = new Voiture("BMW", "Blanche", 5,10000);
+		Voiture peugeot = new Voiture("PEUGEOT", "Bleue", 5,5000); 
+		Voiture citroen = new Voiture("CITROEN", "Rouge", 5,5000);
+		Voiture ferrari = new Voiture ("FERRARI", "Rouge", 1,30000);
+		Voiture toyota = new Voiture("TOYOTA", "Grise", 6,8000);
 		
 		garage.ajoutVoiture(bmw);
 		garage.ajoutVoiture(toyota);

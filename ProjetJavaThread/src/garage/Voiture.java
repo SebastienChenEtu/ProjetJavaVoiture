@@ -2,33 +2,17 @@ package garage;
 
 public class Voiture {
 
-	private String immatriculation;
+	
 	private String modele;
-	private String couleur;
-	private String etat;
-	private int nbCommande;
-	
+	private String couleur;	
 	private int stock;
+	private int temps;
 	
-	public Voiture(String modele,String couleur, int stock) {
+	public Voiture(String modele,String couleur, int stock , int temps) {
 		this.modele = modele; 
 		this.stock = stock;
 		this.couleur = couleur;
-	}
-	
-	public Voiture(String immatriculation, String modele, String couleur, int commande) {
-		this.immatriculation = immatriculation;
-		this.modele = modele;
-		this.couleur = couleur;
-		this.nbCommande = commande;
-	}
-
-	public String getImmatriculation() {
-		return immatriculation;
-	}
-
-	public void setImmatriculation(String immatriculation) {
-		this.immatriculation = immatriculation;
+		this.temps = temps;
 	}
 
 	public String getModele() {
@@ -55,20 +39,12 @@ public class Voiture {
 		this.couleur = couleur;
 	}
 
-	public String getEtat() {
-		return etat;
+	public int getTemps() {
+		return temps;
 	}
 
-	public void setEtat(String etat) {
-		this.etat = etat;
-	}
-
-	public int getNbCommande() {
-		return nbCommande;
-	}
-
-	public void setNbCommande(int nbCommande) {
-		this.nbCommande = nbCommande;
+	public void setTemps(int temps) {
+		this.temps = temps;
 	}
 	
 }
