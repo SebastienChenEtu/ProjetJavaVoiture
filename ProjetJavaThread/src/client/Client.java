@@ -27,7 +27,7 @@ public class Client {
 		PrintWriter outToServer = new PrintWriter(
 				new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())), true);
 
-		// Creation du flux en entree
+		// Creation du flux en entree
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
 		System.out.println(
