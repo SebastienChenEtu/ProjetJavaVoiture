@@ -12,6 +12,15 @@ import java.util.List;
 
 public class Client {
 
+	/**
+	 * Lancement de l'application côté client
+	 * Main : Proposition de commandes permettant l'utilisation des fonctions proposées
+	 * - Réserver
+	 * - Prendre
+	 * - Commander
+	 * - Rendre
+	 * - Suivi
+	 */
 	public static void main(String argv[]) throws Exception {
 
 		String nbModele;
@@ -31,7 +40,7 @@ public class Client {
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
 		System.out.println(
-				"Bienvenue! Voulez Vous: \n Reserver (taper reserver) \n Voir votre suivi (taper suivi) \n prendre une voiture en reserve (taper prendre) \n rendre une voiture (taper rendre) \n Voir les voitures déjà commandées (taper commandee) \n Quitter (taper stop)");
+				"Bienvenue ! Voulez-vous: \n Réserver (taper reserver) \n Voir votre suivi (taper suivi) \n Prendre une voiture en réserve (taper prendre) \n Rendre une voiture (taper rendre) \n Voir les voitures déjà commandées (taper commandee) \n Quitter (taper stop)");
 		request = inFromUser.readLine();
 
 		// Emission des donnees au serveur
@@ -46,7 +55,7 @@ public class Client {
 				//affichage
 				nbModele = inFromServer.readLine();
 				int nbreVoiture = Integer.parseInt(nbModele);
-				System.out.println("Voici les Voitures que nous vous proposant: ");
+				System.out.println("Voici les voitures que nous vous proposons :");
 				listeModele = new LinkedList<String>();
 				for (int i = 0; i < nbreVoiture; i++) {
 					answer = inFromServer.readLine();
@@ -57,7 +66,7 @@ public class Client {
 				}
 
 				//Reservation
-				System.out.println("Veuillez Indiquer Le Modele souhaité :");
+				System.out.println("Veuillez indiquer le modèle souhaité :");
 				answer = inFromUser.readLine();
 				outToServer.println(answer);
 				boolean verifSaisie = false; 
@@ -67,7 +76,7 @@ public class Client {
 							answer = inFromServer.readLine();
 							System.out.println(answer);
 							answer = inFromServer.readLine();
-							System.out.println("Voici votre numero de commande "+answer);
+							System.out.println("Voici votre numéro de commande "+answer);
 							answer = inFromServer.readLine();
 							System.out.println("Voici votre mot de passe "+answer);
 							verifSaisie = true;
@@ -76,7 +85,7 @@ public class Client {
 					}
 					if(!verifSaisie){
 						answer = inFromServer.readLine();
-						System.out.println(answer + "Ressaisissez votre modéle : ");
+						System.out.println(answer + "Ressaisissez votre modèle :");
 						System.out.println("");
 						answer = inFromUser.readLine();
 						outToServer.println(answer);
@@ -86,11 +95,11 @@ public class Client {
 				break;
 			
 			case ("prendre"):
-				System.out.println("Veuillez entrez le numéro de commande et le mot de passe:");
-				System.out.println("numéro de commande :");
+				System.out.println("Veuillez entrer le numéro de commande et le mot de passe :");
+				System.out.println("Numéro de commande :");
 				request = inFromUser.readLine();
 				outToServer.println(request);
-				System.out.println("mot de passe :");
+				System.out.println("Mot de passe :");
 				request = inFromUser.readLine();
 				outToServer.println(request);
 				answer = inFromServer.readLine();
@@ -101,7 +110,7 @@ public class Client {
 				nbModele = inFromServer.readLine();
 			int nbreVoitureCmd = Integer.parseInt(nbModele);
 			
-				System.out.println("Voici les Voitures déjà commandées: ");
+				System.out.println("Voici les voitures déjà commandées: ");
 				if(nbreVoitureCmd == 0) {
 					System.out.println("Aucune voiture commandée");
 				}
@@ -115,7 +124,7 @@ public class Client {
 						System.out.println(answer);
 
 						System.out
-								.println("Veuillez Indiquer Le Modele souhaité :");
+								.println("Veuillez indiquer le modèle souhaité :");
 						answer = inFromUser.readLine();
 						outToServer.println(answer);
 						boolean verifSaisie1 = false;
@@ -132,7 +141,7 @@ public class Client {
 							if (!verifSaisie1) {
 								answer = inFromServer.readLine();
 								System.out.println(answer
-										+ "Ressaisissez votre modèle : ");
+										+ "Ressaisissez votre modèle :");
 								System.out.println("");
 								answer = inFromUser.readLine();
 								outToServer.println(answer);
@@ -145,11 +154,11 @@ public class Client {
 				break;
 				
 			case ("rendre"):
-				System.out.println("Veuillez entrez le numéro de commande et le mot de passe:");
-				System.out.println("numéro de commande :");
+				System.out.println("Veuillez entrer le numéro de commande et le mot de passe :");
+				System.out.println("Numéro de commande :");
 				request = inFromUser.readLine();
 				outToServer.println(request);
-				System.out.println("mot de passe :");
+				System.out.println("Mot de passe :");
 				request = inFromUser.readLine();
 				outToServer.println(request);
 				answer = inFromServer.readLine();
@@ -157,11 +166,11 @@ public class Client {
 				break;
 
 			case ("suivi"):
-				System.out.println("Veuillez entrez le numéro de commande et le mot de passe:");
-				System.out.println("numéro de commande :");
+				System.out.println("Veuillez entrer le numéro de commande et le mot de passe :");
+				System.out.println("Numéro de commande :");
 				request = inFromUser.readLine();
 				outToServer.println(request);
-				System.out.println("mot de passe :");
+				System.out.println("Mot de passe :");
 				request = inFromUser.readLine();
 				outToServer.println(request);
 				answer = inFromServer.readLine();
@@ -172,15 +181,15 @@ public class Client {
 				// Lecture des donnees arrivant du serveur
 				answer = inFromServer.readLine();
 				System.out.println(answer
-						+ "Veuillez saisir :\n Reserver pour voir la liste de voiture disponible "
-						+ "\n Suivi pour visualiser le suivi de votre réservation");
+						+ "Veuillez saisir :\n reserver pour voir la liste de voiture disponible "
+						+ "\n suivi pour visualiser le suivi de votre réservation");
 				
 				
 
 				System.out.println("");
 			}
 			System.out.println(
-					"Voulez Vous: \n Reserver (taper reserver) \n rendre une voiture (taper rendre) \n Voir votre suivi (taper suivi) \n prendre une voiture en reserve (taper prendre) \n Voir les voitures déjà commandées (taper commandee) \n Quitter (taper stop)");
+					"Voulez-vous: \n Réserver (taper reserver) \n Rendre une voiture (taper rendre) \n Voir votre suivi (taper suivi) \n Prendre une voiture en réserve (taper prendre) \n Voir les voitures déjà commandées (taper commandee) \n Quitter (taper stop)");
 			request = inFromUser.readLine();
 			listeModele = null;
 			// Emission des donnees au serveur

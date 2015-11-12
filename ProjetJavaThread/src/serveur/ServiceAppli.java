@@ -24,11 +24,19 @@ public class ServiceAppli extends Thread {
 	private static Garage garage;
 	public static int numeroCommande = 1;
 
+	/**
+	 * Contructeur du service
+	 * @param socket
+	 * @param garage
+	 */
 	public ServiceAppli(Socket socket, Garage garage) {
 		connectionSocket = socket;
 		this.garage = garage;
 	}
 
+	/**
+	 * Serveur appelle ce service permettant traiter les demandes de l'utilisateur
+	 */
 	public void run() {
 		// Création du flux en entrée attachée à la socket
 		BufferedReader inFromClient;
@@ -121,7 +129,7 @@ public class ServiceAppli extends Thread {
 					}
 				}
 				if(!verife){
-					request = "saisie incorect";
+					request = "Saisie incorrecte";
 				}
 				outToClient.println(request);
 				break;
@@ -147,6 +155,10 @@ public class ServiceAppli extends Thread {
 		}
 	}
 
+	/**
+	 * Affiche la liste des voitures disponibles au client
+	 * @param outToClient
+	 */
 	public void afficherListVoitureServer(PrintWriter outToClient){
 		nbVoiture = Integer.toString(garage.getListVoiture().size());
 		outToClient.println(nbVoiture);
@@ -161,6 +173,14 @@ public class ServiceAppli extends Thread {
 		}
 	}
 
+	/**
+	 * Méthode de réservation d'une voiture
+	 * @param inFromClient
+	 * @param outToClient
+	 * @param garage
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
 	public void reserver(BufferedReader inFromClient, PrintWriter outToClient,Garage garage) throws IOException, InterruptedException{
 		request = inFromClient.readLine();
 		boolean verifSaisie = false;

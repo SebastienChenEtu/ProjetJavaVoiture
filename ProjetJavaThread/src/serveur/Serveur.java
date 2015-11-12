@@ -6,6 +6,12 @@ import garage.Voiture;
 
 public class Serveur {
 	
+	/**
+	 * Initialisation d'un garage et de 5 voitures avec leur stock qui sont ajoutées dans ce dernier
+	 * Lancement du serveur
+	 * @param argv
+	 * @throws Exception
+	 */
 	public static void main(String argv[]) throws Exception {
 		
 		Garage garage = new Garage(1);
